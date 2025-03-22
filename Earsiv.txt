@@ -1,0 +1,44 @@
+CREATE TABLE kategori (
+    kategori_id INT PRIMARY KEY AUTO_INCREMENT,
+    kategori_ad VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE etiket (
+    etiket_id INT PRIMARY KEY AUTO_INCREMENT,
+    etiket_ad VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE belgeler (
+    belge_id INT PRIMARY KEY AUTO_INCREMENT,
+    belge_ad VARCHAR(255) NOT NULL,
+    kategori_id INT,
+    yuklenme_tarihi TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    dosya_yolu VARCHAR(255),
+    FOREIGN KEY (kategori_id) REFERENCES kategori(kategori_id)
+);
+
+CREATE TABLE belge_etiket (
+    belge_id INT,
+    etiket_id INT,
+    PRIMARY KEY (belge_id, etiket_id),
+    FOREIGN KEY (belge_id) REFERENCES belgeler(belge_id),
+    FOREIGN KEY (etiket_id) REFERENCES etiket(etiket_id)
+);
+
+CREATE TABLE medya (
+    medya_id INT PRIMARY KEY AUTO_INCREMENT,
+    medya_ad VARCHAR(255) NOT NULL,
+    kategori_id INT,
+    yuklenme_tarihi TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    dosya_yolu VARCHAR(255),
+    medya_tipi ENUM('resim', 'video', 'ses') NOT NULL,
+    FOREIGN KEY (kategori_id) REFERENCES kategori(kategori_id)
+);
+
+CREATE TABLE kullanici (
+    kullanici_id INT PRIMARY KEY AUTO_INCREMENT,
+    ad VARCHAR(255) NOT NULL,
+    soyad VARCHAR(255),
+    email VARCHAR(255) UNIQUE,
+    sifre VARCHAR(255) NOT NULL
+);
