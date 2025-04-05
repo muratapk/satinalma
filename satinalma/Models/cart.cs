@@ -1,9 +1,11 @@
-﻿using System.Security.Cryptography.Xml;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Security.Cryptography.Xml;
 
 namespace satinalma.Models
 {
     public class cart
     {
+    [Key] 
     public int cart_id { get; set; }
     public int ? customer_id { get; set; }
     public int ? product_id { get; set; }
