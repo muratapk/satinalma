@@ -16,7 +16,9 @@ namespace satinalma.Models
         public string Picture_Image { get; set; } = string.Empty;
         public DateTime ? created_at  { get;set; }
         [NotMapped]
-        virtual public IFormFile ? Dosya { get; set; }    
+        
+        virtual public IFormFile ? Dosya { get; set; }
+        virtual public categories? Categories { get; set; }
         public virtual ICollection<OrderDetails>? Details { get; set; }
         public virtual ICollection<product_reviews> ?reviews { get; set; }
         public virtual ICollection<cart>? Carts { get; set; }

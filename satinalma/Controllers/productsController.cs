@@ -49,6 +49,7 @@ namespace satinalma.Controllers
         // GET: products/Create
         public IActionResult Create()
         {
+            ViewBag.kateliste = new SelectList(_context.Categories, "category_id", "name");
             return View();
         }
 
@@ -68,7 +69,7 @@ namespace satinalma.Controllers
                     if(Dosya.ContentType=="image/png" ||  Dosya.ContentType=="image/jpg" || Dosya.ContentType=="image/jpeg" || Dosya.ContentType=="image/gif")
                     {
                         
-         string path = Path.Combine(Directory.GetCurrentDirectory() + "/ProductImage/", yeni_isim);
+         string path = Path.Combine(Directory.GetCurrentDirectory() + "/wwwroot/ProductImage/", yeni_isim);
                         //Path.Combine ile kök dizin yolunu ile bizim belirtiğimiz yolu birleştir
                         using (var fileStream = new FileStream(path, FileMode.Create))
                         {
@@ -92,8 +93,11 @@ namespace satinalma.Controllers
         }
 
         // GET: products/Edit/5
+        //
         public async Task<IActionResult> Edit(int? id)
         {
+            ViewBag.kateliste = new SelectList(_context.Categories, "category_id", "name");
+
             if (id == null || _context.Products == null)
             {
                 return NotFound();
@@ -110,10 +114,37 @@ namespace satinalma.Controllers
         // POST: products/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        //edit formunda gelen veri bu kısım kayıt edecek
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("product_id,name,description,price,stock_quantity,category_id,created_at")] product product)
+        public async Task<IActionResult> Edit(int id, [Bind("product_id,name,description,price,stock_quantity,category_id,created_at")] product product,IFormFile Dosya)
         {
+            if (Dosya != null)
+            {
+                string uzanti = Path.GetExtension(Dosya.FileName).ToLower();
+                string yeni_isim = Guid.NewGuid().ToString() + uzanti;
+                if (Dosya.Length <= 5242880)
+                {
+                    if (Dosya.ContentType == "image/png" || Dosya.ContentType == "image/jpg" || Dosya.ContentType == "image/jpeg" || Dosya.ContentType == "image/gif")
+                    {
+
+                        string path = Path.Combine(Directory.GetCurrentDirectory() + "/wwwroot/ProductImage/", yeni_isim);
+                        //Path.Combine ile kök dizin yolunu ile bizim belirtiğimiz yolu birleştir
+                        using (var fileStream = new FileStream(path, FileMode.Create))
+                        {
+                            //hosting kısmın yukarı belirtiğimiz yol üzerinden kayıt dosyası
+                            await Dosya.CopyToAsync(fileStream);
+                            //resimi varsayılan klasöre kopyala
+                            product.Picture_Image = yeni_isim;
+                        }
+                    }
+                }
+
+            }
+
+
+
+
             if (id != product.product_id)
             {
                 return NotFound();
@@ -139,6 +170,7 @@ namespace satinalma.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+
             return View(product);
         }
 
@@ -165,13 +197,25 @@ namespace satinalma.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+         
             if (_context.Products == null)
             {
                 return Problem("Entity set 'ApplicationDbContext.Products'  is null.");
             }
             var product = await _context.Products.FindAsync(id);
+
             if (product != null)
             {
+            //dosya silme işlemi
+             string yol = Path.Combine(Directory.GetCurrentDirectory() + "/wwwroot/ProductImage/" + product.Picture_Image);
+             FileInfo fileInfo = new FileInfo(yol);
+             if(fileInfo.Exists)
+                {
+                    System.IO.File.Delete(fileInfo.FullName);
+                    fileInfo.Delete();
+
+                }
+             //dosya silme işlemi
                 _context.Products.Remove(product);
             }
             
