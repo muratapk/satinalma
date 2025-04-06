@@ -68,7 +68,7 @@ namespace satinalma.Controllers
                     if(Dosya.ContentType=="image/png" ||  Dosya.ContentType=="image/jpg" || Dosya.ContentType=="image/jpeg" || Dosya.ContentType=="image/gif")
                     {
                         
-                        string path = Path.Combine(CurrentDirectory() + "/ProductImage/", yeni_isim);
+                        string path = Path.Combine(Directory.GetCurrentDirectory() + "/ProductImage/", yeni_isim);
                         //Path.Combine ile kök dizin yolunu ile bizim belirtiğimiz yolu birleştir
                         using (var fileStream = new FileStream(path, FileMode.Create))
                         {
