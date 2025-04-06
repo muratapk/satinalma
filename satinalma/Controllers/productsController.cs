@@ -62,13 +62,13 @@ namespace satinalma.Controllers
             if(Dosya!=null)
             {
                 string uzanti=Path.GetExtension(Dosya.FileName).ToLower();
-                string yeni_isim=Guid.NewGuid().ToString();
+                string yeni_isim=Guid.NewGuid().ToString()+uzanti;
                 if(Dosya.Length<=5242880)
                 {
                     if(Dosya.ContentType=="image/png" ||  Dosya.ContentType=="image/jpg" || Dosya.ContentType=="image/jpeg" || Dosya.ContentType=="image/gif")
                     {
                         
-                        string path = Path.Combine(Directory.GetCurrentDirectory() + "/ProductImage/", yeni_isim);
+         string path = Path.Combine(Directory.GetCurrentDirectory() + "/ProductImage/", yeni_isim);
                         //Path.Combine ile kök dizin yolunu ile bizim belirtiğimiz yolu birleştir
                         using (var fileStream = new FileStream(path, FileMode.Create))
                         {
