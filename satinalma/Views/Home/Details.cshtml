@@ -10,18 +10,17 @@
     <div class="row">
         <!-- Ürün Görseli -->
         <div class="col-md-6">
-            <img src="https://via.placeholder.com/500x500" alt="Ürün Görseli" class="img-fluid">
+            <img src="/ProductImage/@Model.Picture_Image" alt="Ürün Görseli" class="img-fluid">
         </div>
 
         <!-- Ürün Bilgileri -->
         <div class="col-md-6">
             <h2>Ürün Adı</h2>
-            <p class="text-muted">Kategori: Elektronik</p>
-            <h3 class="text-success">₺1999.99</h3>
+            <p class="text-muted">Kategori: @Model.category_id</p>
+            <h3 class="text-success">Fiyat:@Model.price</h3>
 
             <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eget felis vel neque feugiat feugiat ut
-                sed nulla.
+                @Model.description
             </p>
 
             <ul>
@@ -48,29 +47,5 @@
         </div>
     </div>
 
-    <div class="row mt-4">
-        <div class="col-12">
-            <h4>Yorumlar</h4>
-
-            <!-- Yorumlar -->
-            <div class="border p-3 mb-3">
-                <p><strong>Ali Y.</strong> <small>1 hafta önce</small></p>
-                <p>Ürün gerçekten harika! Çok beğendim.</p>
-            </div>
-
-            <div class="border p-3 mb-3">
-                <p><strong>Aylin K.</strong> <small>3 gün önce</small></p>
-                <p>Fiyat/performans açısından çok iyi bir ürün, kesinlikle tavsiye ederim.</p>
-            </div>
-
-            <!-- Yorum Yapma -->
-            <form>
-                <div class="mb-3">
-                    <label for="yorum" class="form-label">Yorum Yapın</label>
-                    <textarea class="form-control" id="yorum" rows="3" placeholder="Yorumunuzu yazın..."></textarea>
-                </div>
-                <button type="submit" class="btn btn-primary">Gönder</button>
-            </form>
-        </div>
-    </div>
+    @Html.Partial("_yorumlarPartialView")
 </div>
