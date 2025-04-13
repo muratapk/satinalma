@@ -1,8 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using satinalma.Models;
 namespace satinalma.Data
 {
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext :IdentityDbContext<AppUser,AppRole,int>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options):base(options)
         {

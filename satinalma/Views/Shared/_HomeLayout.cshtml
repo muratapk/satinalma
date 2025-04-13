@@ -180,7 +180,7 @@
 
                     <ul class="d-flex justify-content-end list-unstyled m-0">
                         <li>
-                            <a href="#" class="rounded-circle bg-light p-2 mx-1">
+                            <a href="/Login/Index" class="rounded-circle bg-light p-2 mx-1">
                                 <svg width="24" height="24" viewBox="0 0 24 24"><use xlink:href="#user"></use></svg>
                             </a>
                         </li>
@@ -440,12 +440,13 @@
                 alert(yorum);
                 alert(productId);
                 $.ajax({
-                     type:'POST',
-                     url:'/Comments/Add',//Comment ismi control onunde add Action
+                    type:'POST',
+                    url:'/Comments/Add',//Comment ismi control onunde add Action
                     data: $("#formyorum").serialize(),
-                     success: function (data)
+                    success: function (data)
                     {
                          $("#CommentList").html(data);
+                        alert("Kayıt Yapıldı");
                     }
                     error: function () { 
                         alert("Yorum gönderilirken Hata Oluştu");
