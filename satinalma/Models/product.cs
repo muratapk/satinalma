@@ -22,5 +22,6 @@ namespace satinalma.Models
         public virtual ICollection<OrderDetails>? Details { get; set; }
         public virtual ICollection<product_reviews> ?reviews { get; set; }
         public virtual ICollection<cart>? Carts { get; set; }
+        public virtual ICollection<Comment>? Comments { get; set; }
     }
 }

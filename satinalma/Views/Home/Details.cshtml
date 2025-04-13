@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/_HomeLayout.cshtml";
 }
 
-<h1>Details @Model.product_id</h1>
+<h1>Details</h1>
 
 <div class="container py-5">
     <div class="row">
@@ -47,5 +47,5 @@
         </div>
     </div>
 
-    @Html.Partial("_yorumlarPartialView")
+    @Html.Partial("_yorumlarPartialView",Model)
 </div>

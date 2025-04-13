@@ -14,6 +14,7 @@ namespace satinalma.Data
         public DbSet<Orders> Orders { get; set; }
         public DbSet<categories> Categories { get; set; }   
         public DbSet<product> Products { get; set; }
+        public DbSet<Comment> Comments { get; set; }
         public DbSet<product_reviews>product_Reviews { get; set; }  
         
 

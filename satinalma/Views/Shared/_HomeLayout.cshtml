@@ -434,11 +434,24 @@
     <script src="/Home/js/script.js"></script>
     <script>
         $(document).ready(function () {
-            $("#formyorum").on("submit", function () {
+            $("#yorumbtn").on("click", function () {
                 let yorum = $("#yorum").val();
-               
+                let productId = $("#productid").val();
                 alert(yorum);
                 alert(productId);
+                $.ajax({
+                     type:'POST',
+                     url:'/Comments/Add',//Comment ismi control onunde add Action
+                    data: $("#formyorum").serialize(),
+                     success: function (data)
+                    {
+                         $("#CommentList").html(data);
+                    }
+                    error: function () { 
+                        alert("Yorum gönderilirken Hata Oluştu");
+                    }
+                
+                });
 
             });
         

@@ -1,26 +1,25 @@
-﻿<div class="row mt-4">
+﻿@model satinalma.Models.product
+<div class="row mt-4">
     <div class="col-12">
         <h4>Yorumlar</h4>
 
         <!-- Yorumlar -->
-        <div class="border p-3 mb-3">
-            <p><strong>Ali Y.</strong> <small>1 hafta önce</small></p>
-            <p>Ürün gerçekten harika! Çok beğendim.</p>
-        </div>
+        <div id="CommentList">
 
-        <div class="border p-3 mb-3">
-            <p><strong>Aylin K.</strong> <small>3 gün önce</small></p>
-            <p>Fiyat/performans açısından çok iyi bir ürün, kesinlikle tavsiye ederim.</p>
+
         </div>
 
         <!-- Yorum Yapma -->
-        <form id="formyorum">
+        <form id="formyorum" action="Add" method="post">
             <div class="mb-3">
-                <input type="hidden" id="productid" value=""/>
+                <input type="hidden" id="productid" name="ProductId" value="@Model.product_id"/>
+                <label for="yorum" class="form-label"><strong>Adınız Soyadınız</strong></label>
+                <input type="text" class="form-control" id="adi" name="UserName"/>
+                <br />
                 <label for="yorum" class="form-label">Yorum Yapın</label>
-                <textarea class="form-control" id="yorum" rows="3" placeholder="Yorumunuzu yazın..."></textarea>
+                <textarea class="form-control" name="Content" id="yorum" rows="3" placeholder="Yorumunuzu yazın..."></textarea>
             </div>
-            <button type="submit" id="yorum" class="btn btn-primary">Gönder</button>
+            <button type="button" id="yorumbtn" class="btn btn-primary">Gönder</button>
         </form>
     </div>
 </div>
